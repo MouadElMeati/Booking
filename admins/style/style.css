@@ -1,0 +1,47 @@
+/* * {
+    font-family: Arial, Helvetica, sans-serif;
+    
+} */
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.custom-bg {
+    background-color: #2ec1ac;
+    border:1px solid #2ec1ac;
+}
+.custom-bg:hover {
+    background-color: #279e8c;
+    border-color: #279e8c;
+
+}
+
+.h-line {
+    width: 150px;
+    margin: 0 auto;
+    height: 1.7px;
+}
+.login-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+}
+#dashbord-menu {
+    position: fixed;
+    height: 100%;
+}
+@media screen and (max-width:991px) {
+    #dashbord-menu {
+        height: auto;
+        width: 100%;
+    }
+   
+}
+
+ 
