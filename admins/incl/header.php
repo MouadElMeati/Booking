@@ -16,7 +16,7 @@
                         <a class="nav-link text-white" href="dashbord.php">Hotel Infos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="">Rooms</a>
+                        <a class="nav-link text-white" href="rooms.php">Rooms</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href='userList.php'>Users</a>
