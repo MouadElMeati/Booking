@@ -2,27 +2,22 @@
 session_start();
 require('./admins/incl/cnx.php');
 
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: dashbordUser.php");
     exit();
 }
 
-// Get the reservation ID from the URL
 $reservation_id = $_GET['id'];
 
-// Fetch the reservation details
 $stmt = $pdo->prepare("SELECT * FROM reservations WHERE id = ? AND user_id = ?");
 $stmt->execute([$reservation_id, $_SESSION['user_id']]);
 $reservation = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Check if the reservation exists
 if (!$reservation) {
     echo "Reservation not found.";
     exit();
 }
 
-// Handle form submission for updating the reservation
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $room_id = htmlspecialchars(trim($_POST['room_id']));
     $check_in = htmlspecialchars(trim($_POST['check_in']));
@@ -30,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $adults = htmlspecialchars(trim($_POST['adults']));
     $children = htmlspecialchars(trim($_POST['children']));
 
-    // Update the reservation
     $stmt = $pdo->prepare("UPDATE reservations SET room_id = ?, check_in = ?, check_out = ?, adults = ?, children = ? WHERE id = ? AND user_id = ?");
     if ($stmt->execute([$room_id, $check_in, $check_out, $adults, $children, $reservation_id, $_SESSION['user_id']])) {
         header("Location: reservation.php?success=1");

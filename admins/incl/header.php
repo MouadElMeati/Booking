@@ -6,7 +6,6 @@
 <div class="col-lg-2  bg-dark border-top border-3 border-secondary" id="dashbord-menu">
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid flex-lg-column align-items-stretch">
-            <h4 class="mt-2 text-light">ADMIN PANEL</h4>
             <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#admindropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

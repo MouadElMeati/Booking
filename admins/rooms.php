@@ -84,8 +84,8 @@ try {
                     
                 
                         <td>
-                    <a href="update_reserv.php?id=<?php echo $room['id']; ?>" class="btn btn-warning">Update</a>
-                    <a href="deleteReserv.php?id=<?php echo $room['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reservation?');">Delete</a>
+                    <a href="updateRooms.php?id=<?php echo $room['id']; ?>" class="btn btn-warning">Update</a>
+                    <a href="deleteRoom.php?id=<?php echo $room['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reservation?');">Delete</a>
                 
                     </td>
                 </tr>
@@ -93,7 +93,7 @@ try {
         </tbody>
     </table>
     <di class="d-flex justify-content-center mt-5">
-        <button class="btn btn-primary ">Add Rooms</button>
+        <a href="addRooms.php" class="btn btn-primary ">Add Rooms</a>
     </div>
 <?php else: ?>
     <div class="alert alert-warning text-center">
