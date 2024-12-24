@@ -1,6 +1,9 @@
 <?php
 session_start();
-require('incl/cnx.php'); // Include the database connection
+require('incl/cnx.php'); 
+
+
+// Include the database connection
 
 if (isset($_POST['login'])) {
     $username = $_POST['admin-name'];
