@@ -66,7 +66,7 @@
                         <a class="nav-link text-white" href="reservation.php">My Reservations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Infos</a>
+                        <a class="nav-link text-white" href="userInfos.php">My Infos</a>
                     </li>
                 </ul>
             </div>

@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; // Change if necessary
+$host = 'localhost'; 
 $db = 'bookingdb';
-$user = 'root'; // Change to your database username
-$pass = ''; // Change to your database password
+$user = 'root'; 
+$pass = ''; 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);

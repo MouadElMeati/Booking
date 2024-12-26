@@ -83,7 +83,7 @@ try {
 
                     
                 
-                        <td>
+                        <td class="d-flex gap-2">
                     <a href="updateRooms.php?id=<?php echo $room['id']; ?>" class="btn btn-warning">Update</a>
                     <a href="deleteRoom.php?id=<?php echo $room['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reservation?');">Delete</a>
                 
