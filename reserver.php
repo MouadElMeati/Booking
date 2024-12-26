@@ -7,11 +7,12 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$cities = $pdo->query("SELECT * FROM cities")->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch available rooms (with is_available = 1)
-$rooms = $pdo->query("SELECT id, room_type FROM rooms WHERE is_available = 1")->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $pdo->query("SELECT * FROM cities");
+$cities = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$hotels = []; 
+$rooms = []; 
 $error_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserve'])) {
@@ -23,17 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserve'])) {
         $adults = $_POST['adults'];
         $children = $_POST['children'];
         $city_id = $_POST['city_id']; 
+        $hotel_id = $_POST['hotel_id'];
 
-        // Validate room_id
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM rooms WHERE id = ?");
-        $stmt->execute([$room_id]);
+ 
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM rooms WHERE id = ? AND hotel_id = ?");
+        $stmt->execute([$room_id, $hotel_id]);
         if ($stmt->fetchColumn() == 0) {
             throw new Exception("Invalid room selection.");
         }
 
-        // Insert reservation
-        $stmt = $pdo->prepare("INSERT INTO reservations (user_id, room_id, check_in, check_out, adults, children, city_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        if ($stmt->execute([$user_id, $room_id, $check_in, $check_out, $adults, $children, $city_id])) {
+        $stmt = $pdo->prepare("INSERT INTO reservations (user_id, room_id, hotel_id, check_in, check_out, adults, children, city_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt->execute([$user_id, $room_id, $hotel_id, $check_in, $check_out, $adults, $children, $city_id])) {
             header("Location: confirmation.php");
             exit();
         } else {
@@ -42,6 +43,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserve'])) {
     } catch (Exception $e) {
         $error_message = $e->getMessage();
     }
+}
+
+if (isset($_POST['city_id'])) {
+    $city_id = $_POST['city_id'];
+    $stmt = $pdo->prepare("SELECT * FROM hotels WHERE city_id = ?");
+    $stmt->execute([$city_id]);
+    $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+if (isset($_POST['hotel_id'])) {
+    $hotel_id = $_POST['hotel_id'];
+    $stmt = $pdo->prepare("SELECT * FROM rooms WHERE hotel_id = ? AND is_available = 1");
+
+    $stmt->execute([$hotel_id]);
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
 }
 ?>
 
@@ -68,20 +85,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserve'])) {
                 <form method="POST">
                     <div class="mb-3">
                         <label class="form-label">City:</label>
-                        <select name="city_id" class="form-select" required>
+                        <select name="city_id" class="form-select" id="citySelect" required onchange="this.form.submit()">
                             <option value="">Select a city</option>
                             <?php foreach ($cities as $city): ?>
-                                <option value="<?php echo $city['id']; ?>"><?php echo $city['name']; ?></option>
+                                <option value="<?php echo $city['id']; ?>" <?php echo (isset($city_id) && $city_id == $city['id']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($city['name']); ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
+                    <div class="mb-3">
+    <label class="form-label">Hotel:</label>
+    <select name="hotel_id" class="form-select" id="hotelSelect" required onchange="this.form.submit()">
+        <option value="">Select a hotel</option>
+        <?php foreach ($hotels as $hotel): ?>
+            <option value="<?php echo htmlspecialchars($hotel['id']); ?>" <?php echo (isset($hotel_id) && $hotel_id == $hotel['id']) ? 'selected' : ''; ?>>
+                <?php echo htmlspecialchars($hotel['name']); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
                     <div class="mb-3">
                         <label class="form-label">Room:</label>
                         <select name="room_id" class="form-select" required>
                             <option value="">Select a room</option>
                             <?php foreach ($rooms as $room): ?>
                                 <option value="<?php echo $room['id']; ?>">
-                                    <?php echo htmlspecialchars($room['room_type']); ?> <!-- Display room type -->
+                                    <?php echo htmlspecialchars($room['room_type']); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

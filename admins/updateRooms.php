@@ -2,7 +2,6 @@
 session_start();
 require('incl/cnx.php');
 
-// Fetch room details based on ID
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     try {
@@ -23,7 +22,6 @@ if (isset($_GET['id'])) {
     exit;
 }
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $room_type = $_POST['room_type'];
     $price = $_POST['price'];

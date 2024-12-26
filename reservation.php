@@ -1,17 +1,14 @@
 <?php
 session_start();
-require('./admins/incl/cnx.php'); // Ensure this file connects to your database
+require('./admins/incl/cnx.php'); 
 
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php"); // Redirect to login if not logged in
+    header("Location: login.php"); 
     exit();
 }
 
-// Get the user ID from the session
 $user_id = $_SESSION['user_id'];
 
-// Fetch reservations for the logged-in user
 $stmt = $pdo->prepare("SELECT * FROM reservations WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);

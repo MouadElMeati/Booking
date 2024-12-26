@@ -2,7 +2,7 @@
 <?php
 require('incl/cnx.php');
 
-// Handle delete action
+
 if (isset($_POST['delete_id'])) {
     try {
         $deleteStmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
@@ -85,9 +85,9 @@ try {
                     <td><?php echo htmlspecialchars($user['address']); ?></td>
                     <td><?php echo htmlspecialchars($user['pincode']); ?></td>
                     <td><?php echo htmlspecialchars($user['birthday']); ?></td>
-                    <td>******</td> <!-- Mask password -->
+                    <td>******</td>
                     <td>
-                        <!-- Delete Button -->
+                       
                         <form action="" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
                             <input type="hidden" name="delete_id" value="<?php echo $user['id']; ?>">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
