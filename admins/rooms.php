@@ -12,7 +12,7 @@ if (isset($_POST['delete_id'])) {
 }
 
 try {
-    $stmt = $pdo->query("SELECT id, room_type, price, facilities,features FROM rooms");
+    $stmt = $pdo->query("SELECT id, room_type, price, facilities,features,hotel_id FROM rooms");
     $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Error fetching rooms: " . $e->getMessage();
@@ -68,6 +68,7 @@ try {
                 <th>Price</th>
                 <th>Facilitiés</th>
                 <th>Features</th>
+                <th>Hotels</th>
                 <th>Actions</th>
             
             </tr>
@@ -80,6 +81,7 @@ try {
                     <td><?php echo htmlspecialchars($room['price']); ?></td>
                     <td><?php echo htmlspecialchars($room['facilities']); ?></td>
                     <td><?php echo htmlspecialchars($room['features']); ?></td>
+                    <td><?php echo htmlspecialchars($room['hotel_id']); ?></td>
 
                     
                 

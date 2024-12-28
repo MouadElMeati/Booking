@@ -88,7 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 </head>
 
 <body class="bg-light">
-    <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-3 py-lg-2 shadow-sm sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php"><?php echo htmlspecialchars($hotelName); ?></a>
@@ -147,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 <div class="modal fade" id="RegisterModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form method="POST"> <!-- Ensure method is POST -->
+            <form method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title d-flex align-items-center"><i class="bi bi-person-lines-fill fs-3 me-2"></i>User Registration</h5>
                     <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -189,11 +188,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 <div class="swiper-slide"><img src="images/carousel/carouselFive.png" class="w-100 d-block"/></div>
                 <div class="swiper-slide"><img src="images/carousel/carouselSix.png" class="w-100 d-block"/></div>
             </div>
-            <!-- Add Pagination -->
+          
             <div class="swiper-pagination"></div>
         </div>
     </div>
-    <!-- check form -->
     <div class="container Availability-form">
         <div class="row">
             <div class="col-lg-12 bg-white shadow p-4 rounded">
@@ -240,7 +238,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             </div>
         </div>
     </div>
-    <!-- Our Rooms -->   
 
         <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Rooms</h2>
         <div class="container">
@@ -430,7 +427,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             </div>
         </div>
         <?php require('include/footer.php') ?>
-        <!-- Scripts -->
+        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="main/main.js"></script>

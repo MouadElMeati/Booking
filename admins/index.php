@@ -3,22 +3,16 @@ session_start();
 require('incl/cnx.php'); 
 
 
-// Include the database connection
 
 if (isset($_POST['login'])) {
     $username = $_POST['admin-name'];
     $password = $_POST['admin-password'];
 
-    // Prepare and execute the query with positional placeholders (?)
     $stmt = $pdo->prepare("SELECT * FROM `admin_crud` WHERE `admin-name` = ? AND `admin-password` = ?");
-    $stmt->execute([$username, $password]); // Pass the values in the correct order
+    $stmt->execute([$username, $password]); 
     $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Debugging: check if the admin is fetched
-
-    // Verify password
     if ($admin && $password === $admin['admin-password']) {
-        // If passwords match, set session and redirect
         $_SESSION['admin-name'] = $admin['admin-name'];
         $_SESSION['admin-password'] = $admin['admin-password'];
         header("Location:dashbord.php");
