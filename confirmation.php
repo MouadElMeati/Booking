@@ -17,38 +17,12 @@ session_start();
                 <h1 class="card-title">Reservation Successful!</h1>
                 <p class="card-text">Thank you for your reservation, <strong><?php echo htmlspecialchars($_SESSION['user_name']); ?></strong>!</p>
                 <p class="card-text">Your reservation details will be sent to your email.</p>
-                <a href="ticket.php" class="btn btn-primary">Print Ticket</a>
-                <a href="index.php" class="btn btn-primary">Return to Home</a>
+                <a href="dashbordUser.php" class="btn btn-primary">Return to Home</a>
             </div>
         </div>
     </div>
 
-    <div class="container mt-5">
-        <div class="card shadow">
-            <div class="card-body">
-                <h2 class="card-title text-center">Payment Method</h2>
-                <form action="process_payment.php" method="POST">
-                    <div class="mb-3">
-                        <label for="cardNumber" class="form-label">Card Number</label>
-                        <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cardName" class="form-label">Cardholder Name</label>
-                        <input type="text" class="form-control" id="cardName" name="cardName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="expiryDate" class="form-label">Expiry Date</label>
-                        <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control" id="cvv" name="cvv" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit Payment</button>
-                </form>
-            </div>
-        </div>
-    </div>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

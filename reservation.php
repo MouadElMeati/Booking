@@ -1,9 +1,9 @@
 <?php
 session_start();
-require('./admins/incl/cnx.php'); 
+require('./admins/incl/cnx.php');
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php"); 
+    header("Location: login.php");
     exit();
 }
 
@@ -63,7 +63,7 @@ $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </nav>
 
-    </div>
+    
 
     <div class="col-lg-2  bg-dark border-top border-3 border-secondary" id="dashbord-menu">
         <nav class="navbar navbar-expand-lg navbar-dark ">
@@ -84,7 +84,7 @@ $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </nav>
     </div>
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="row">
             <div class="container mt-5">
                 <h2 class="text-center">My Reservations</h2>

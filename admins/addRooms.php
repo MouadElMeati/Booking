@@ -2,19 +2,31 @@
 session_start();
 require('incl/cnx.php');
 
+// Fetch hotels for the dropdown
+try {
+    $hotelStmt = $pdo->query("SELECT id, name FROM hotels");
+    $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error fetching hotels: " . $e->getMessage();
+    $hotels = [];
+}
+
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $room_type = $_POST['room_type'];
     $price = $_POST['price'];
     $facilities = $_POST['facilities'];
     $features = $_POST['features'];
+    $hotel_id = $_POST['hotel_id']; // Get the selected hotel ID
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO rooms (room_type, price, facilities, features) VALUES (:room_type, :price, :facilities, :features)");
+        $stmt = $pdo->prepare("INSERT INTO rooms (room_type, price, facilities, features, hotel_id) VALUES (:room_type, :price, :facilities, :features, :hotel_id)");
         $stmt->execute([
             'room_type' => $room_type,
             'price' => $price,
             'facilities' => $facilities,
-            'features' => $features
+            'features' => $features,
+            'hotel_id' => $hotel_id // Insert the hotel ID
         ]);
         header('Location: rooms.php');
         exit;
@@ -39,6 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="card-body">
             <h2 class="card-title text-center">Add Room</h2>
             <form action="addRooms.php" method="POST">
+                <div class="mb-3">
+                    <label for="hotel_id" class="form-label">Select Hotel</label>
+                    <select class="form-select" id="hotel_id" name="hotel_id" required>
+                        <option value="">Select a hotel</option>
+                        <?php foreach ($hotels as $hotel): ?>
+                            <option value="<?php echo htmlspecialchars($hotel['id']); ?>">
+                                <?php echo htmlspecialchars($hotel['name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                 <div class="mb-3">
                     <label for="room_type" class="form-label">Room Type</label>
                     <input type="text" class="form-control" id="room_type" name="room_type" required>

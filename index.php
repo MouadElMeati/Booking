@@ -160,7 +160,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                             <div class="col-md-6 ps-0 mb-3"><label class="form-label">Name:</label><input name="name" type="text" class="form-control shadow-none" required></div>
                             <div class="col-md-6 ps-0 mb-3"><label class="form-label">Email:</label><input name="email" type="email" class="form-control shadow-none" required></div>
                             <div class="col-md-6 ps-0 mb-3"><label class="form-label">Phone Number:</label><input name="tel" type="tel" class="form-control shadow-none" required></div>
-                            <div class="col-md-6 ps-0 mb-3"><label class="form-label">Picture:</label><input type="file" accept=".jpg, .png, .jpeg" class="form-control shadow-none"></div>
                             <div class="col-md-6 ps-0 mb-3"><label class="form-label">Address:</label><textarea name="adress" class="form-control shadow-none" rows="1" required></textarea></div>
                             <div class="col-md-6 ps-0 mb-3"><label class="form-label">Pin Code:</label><input name="pincode" type="text" class="form-control shadow-none" required></div>
                             <div class="col-md-6 ps-0 mb-3"><label class="form-label">Your Birthday:</label><input name="birthday" type="date" class="form-control shadow-none" required></div>
@@ -238,7 +237,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             </div>
         </div>
     </div>
+    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Hotels</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 my-3">
+                    <div class="card border-0 shadow" style="max-width: 350pxrem;margin: auto;">
+                        <img src="images/hotels/hotels.jpg" class="card-img-top" >
+                        <div class="card-body">
+                          <h4 >CR7 Hotel</h4>
+                            <h5>Marakech</h5>
+                          <div class="rating mb-4">
+                            <h6 class="mb-1">Rating</h6>
+                            <span class="badge rounded-pill bg-light">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                </div> 
+                <div class="col-lg-4 col-md-6 my-3">
+                    <div class="card border-0 shadow" style="max-width: 350pxrem;margin: auto;">
+                        <img src="images/hotels/tanger.jpg" class="card-img-top " >
+                        <div class="card-body">
+                        <h4 >Hotel Souis</h4>
+                        <h5>Tanger</h5>
+                        <div class="rating mb-4">
+                            <h6 class="mb-1">Rating</h6>
+                            <span class="badge rounded-pill bg-light">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                </div>  
+                <div class="col-lg-4 col-md-6 my-3">
+                    <div class="card border-0 shadow" style="max-width: 350pxrem;margin: auto;">
+                        <img src="images/hotels/hotelfarah.jpg" class="card-img-top" >
+                        <div class="card-body">
+                        <h4 >Hotel Farah</h4>
+                        <h5>Rabat</h5>
+                          <div class="rating mb-4">
+                            <h6 class="mb-1">Rating</h6>
+                            <span class="badge rounded-pill bg-light">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </span>
+                          </div>
+     
+                        </div>
+                      </div>
+                </div>  
+                <div class="col-lg-12 text-center mt-5">
 
+                </div>
+            </div>
         <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Rooms</h2>
         <div class="container">
             <div class="row">

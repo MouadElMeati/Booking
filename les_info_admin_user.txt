@@ -1,0 +1,6 @@
+admin :
+username : Mouad El Meati
+password :20010630
+user :
+email : zaid@gmail.com
+password : 20032003

@@ -2,6 +2,14 @@
 session_start();
 require('incl/cnx.php');
 
+try {
+    $hotelStmt = $pdo->query("SELECT id, name FROM hotels");
+    $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error fetching hotels: " . $e->getMessage();
+    $hotels = [];
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     try {
@@ -27,14 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
     $facilities = $_POST['facilities'];
     $features = $_POST['features'];
+    $hotel_id = $_POST['hotel_id']; 
 
     try {
-        $updateStmt = $pdo->prepare("UPDATE rooms SET room_type = :room_type, price = :price, facilities = :facilities, features = :features WHERE id = :id");
+        $updateStmt = $pdo->prepare("UPDATE rooms SET room_type = :room_type, price = :price, facilities = :facilities, features = :features, hotel_id = :hotel_id WHERE id = :id");
         $updateStmt->execute([
             'room_type' => $room_type,
             'price' => $price,
             'facilities' => $facilities,
             'features' => $features,
+            'hotel_id' => $hotel_id, 
             'id' => $id
         ]);
 
@@ -61,6 +71,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form method="POST">
         <div class="form-group mb-3">
+            <label for="hotel_id">Select Hotel</label>
+            <select name="hotel_id" id="hotel_id" class="form-select" required>
+                <option value="">Select a hotel</option>
+                <?php foreach ($hotels as $hotel): ?>
+                    <option value="<?php echo htmlspecialchars($hotel['id']); ?>" <?php echo ($hotel['id'] == $room['hotel_id']) ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($hotel['name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
             <label for="room_type">Room Type</label>
             <input type="text" name="room_type" id="room_type" class="form-control" value="<?php echo htmlspecialchars($room['room_type']); ?>" required>
         </div>
@@ -82,12 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="text-center">
             <button type="submit" class="btn btn-success">Update Room</button>
-            <a href="dashboard.php" class="btn btn-secondary">Cancel</a>
+            <a href="rooms.php" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
 
 <?php require('incl/scripte.php'); ?>
 </body>
-
 </html>
