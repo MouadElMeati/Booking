@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserve'])) {
 
         $stmt = $pdo->prepare("INSERT INTO reservations (user_id, room_id, hotel_id, check_in, check_out, adults, children, city_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         if ($stmt->execute([$user_id, $room_id, $hotel_id, $check_in, $check_out, $adults, $children, $city_id])) {
-            header("Location: confirmation.php");
+            header("Location: payment.php");
             exit();
         } else {
             throw new Exception("An error occurred while processing your reservation.");
