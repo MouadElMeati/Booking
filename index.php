@@ -56,6 +56,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     }
 }
 ?>
+<?php
+require('admins/incl/cnx.php'); // Database connection
+
+// Fetch cities from the database
+$cities_stmt = $pdo->prepare("SELECT * FROM cities");
+$cities_stmt->execute();
+$cities = $cities_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Check if a city is selected
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['city'])) {
+    $selected_city = $_POST['city'];
+
+    // Fetch available hotels based on the selected city
+    $hotels_stmt = $pdo->prepare("SELECT * FROM hotels WHERE city_id = :city_id AND is_available = 1");
+    $hotels_stmt->execute([':city_id' => $selected_city]);
+    $available_hotels = $hotels_stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
 <?php 
     $stmt = $pdo->prepare("SELECT hotelName FROM hotelinfo WHERE id = 1"); 
     $stmt->execute();
@@ -200,9 +218,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                     <div class="col-lg-2">
                             <label class="form-label" style="font-weight: 500;">City</label>
                             <select class="form-select shadow-none" aria-label="Default select example">
-                                <option value="1">Kenitra</option>
-                                <option value="2">Rabat</option>
-                                <option value="3">Tanger</option>
+                            <?php foreach ($cities as $city): ?>
+                            <option value="<?php echo $city['id']; ?>"><?php echo htmlspecialchars($city['name']); ?></option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-lg-2">
@@ -216,17 +234,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                         <div class="col-lg-2">
                             <label class="form-label" style="font-weight: 500;">Adults</label>
                             <select class="form-select shadow-none" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
                             </select>
                         </div>
                         <div class="col-lg-2">
                             <label class="form-label" style="font-weight: 500;">Children</label>
                             <select class="form-select shadow-none" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
                             </select>
                         </div>
                         <div class="col-lg-2  mt-2">

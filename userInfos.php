@@ -89,12 +89,12 @@ if (!$user) {
 </div>
 <div class="container-fluid" >
     <div class="row">
-        <div class="container mt-5">
+        <div class="container mt-5 ">
             <h2 class="text-center">My Infos</h2>
         
             
 
-            <table class="table table-bordered  mt-4 ">
+            <table class="table table-bordered  mt-4 "> 
                 <thead>
                     <tr>
                         <th>ID</th>

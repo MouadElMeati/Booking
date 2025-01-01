@@ -1,3 +1,12 @@
+<?php
+require('admins/incl/cnx.php'); // Database connection
+
+// Fetch rooms from the database
+$rooms_stmt = $pdo->prepare("SELECT * FROM rooms");
+$rooms_stmt->execute();
+$rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +20,7 @@
 </head>
 
 <body class="bg-light">
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-3 py-lg-2 shadow-sm sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-3 py-lg-2 shadow-sm sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php">Goat Hotels</a>
             <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +34,6 @@
                     <li class="nav-item"><a class="nav-link me-2" href="Contact.php">Contact us</a></li>
                     <li class="nav-item"><a class="nav-link me-2" href="about.php">About Us</a></li>
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -33,155 +41,41 @@
         <h2 class="fw-bold h-font text-center">Our Rooms</h2>
         <div class="h-line bg-dark"></div>
     </div>
-    <div class="container ">
-        <div class="col-lg-12 col-md-12 px-4">
-            <div class="card mb-4 border-0 shadow">
-                <div class="row g-0 p-3 align-items-center">
-                    <div class="col-md-5">
-                        <img src="images/room/one.png" class="img-fluid rounded">
-                    </div>
-                    <div class="col-md-5">
-                        <h5 class="mb-3">Sipmle Room</h5>
-                        <div class="features mb-3 ">
-                            <h6>Features</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                2 Rooms
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                2 Bathroom
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                1 Balcony
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                3 Sofa
-                            </span>
+    <div class="container">
+        <div class="row">
+            <?php foreach ($rooms as $room): ?>
+                <div class="col-lg-4 col-md-6 mb-4"> <!-- 3 rooms per line on desktop, 2 on tablets, 1 on mobile -->
+                    <div class="card border-0 shadow">
+                        <div class="p-3">
+                            <div class="mb-3">
+                                <?php if ($room['image'] !== NULL): ?>
+                                    <img src="<?php echo $room['image']; ?>" class="img-fluid rounded">
+                                <?php else: ?>
+                                    <img src="default-image.jpg" class="img-fluid rounded">
+                                <?php endif; ?>
+                            </div>
+                            <h5 class="mb-3"><?php echo $room['room_type']; ?></h5>
+                            <div class="features mb-3">
+                                <h6>Features</h6>
+                                <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                    <?php echo $room['features']; ?>
+                                </span>
+                            </div>
+                            <div class="facilities mb-4">
+                                <h6>Facilities</h6>
+                                <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                    <?php echo $room['facilities']; ?>
+                                </span>
+                            </div>
+                            <h6 class="mb-4">$<?php echo $room['price']; ?> per night</h6>
+                            <a href="reserver.php" class="btn btn-sm text-white custom-bg shadow-none px-4 mb-3">Book Now</a>
+                            <a href="rooms.php" class="btn btn-sm btn-outline-dark shadow-none px-3 mb-3">More Details</a>
                         </div>
-                        <div class="facilities mb-4">
-                            <h6>Facilities</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Screen TV
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Wi-Fi
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                In-Room Safe
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Front Desk
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="mb-4">$250 - $500 per night</h6>
-                        <a href="reserver.php" class="btn btn-sm text-white custom-bg shadow-none px-4 mb-3">Book Now </a>
-                        <a href="rooms.php" class="btn btn-sm btn-outline-dark shadow-none px-3 mb-3">More Details </a>
                     </div>
                 </div>
-            </div>
-            <div class="card mb-4 border-0 shadow">
-                <div class="row g-0 p-3 align-items-center">
-                    <div class="col-md-5">
-                        <img src="images/room/five.png" class="img-fluid rounded">
-                    </div>
-                    <div class="col-md-5">
-                        <h5 class="mb-3">Sipmle Room</h5>
-                        <div class="features mb-3 ">
-                            <h6>Features</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                2 Rooms
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                2 Bathroom
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                1 Balcony
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                3 Sofa
-                            </span>
-                        </div>
-                        <div class="facilities mb-4">
-                            <h6>Facilities</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Screen TV
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Wi-Fi
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                In-Room Safe
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Front Desk
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="mb-4">$250 - $500 per night</h6>
-                        <a href="reserver.php" class="btn btn-sm text-white custom-bg shadow-none px-4 mb-3">Book Now </a>
-                        <a href="rooms.php" class="btn btn-sm btn-outline-dark shadow-none px-3 mb-3">More Details </a>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4 border-0 shadow">
-                <div class="row g-0 p-3 align-items-center">
-                    <div class="col-md-5">
-                        <img src="images/room/four.png" class="img-fluid rounded">
-                    </div>
-                    <div class="col-md-5">
-                        <h5 class="mb-3">Sipmle Room</h5>
-                        <div class="features mb-3 ">
-                            <h6>Features</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                2 Rooms
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                2 Bathroom
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                1 Balcony
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                3 Sofa
-                            </span>
-                        </div>
-                        <div class="facilities mb-4">
-                            <h6>Facilities</h6>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Screen TV
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Wi-Fi
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                In-Room Safe
-                            </span>
-                            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-                                Front Desk
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="mb-4">$250 - $500 per night</h6>
-                        <a href="reserver.php" class="btn btn-sm text-white custom-bg shadow-none px-4 mb-3">Book Now </a>
-                        <a href="rooms.php" class="btn btn-sm btn-outline-dark shadow-none px-3 mb-3">More Details </a>
-                    </div>
-                </div>
-            </div>
-
+            <?php endforeach; ?>
         </div>
-
     </div>
-    
-
-
 
     <?php require('include/footer.php') ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="main/main.js"></script>
-</body>
-
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+Nt
