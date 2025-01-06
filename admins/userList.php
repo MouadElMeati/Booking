@@ -57,7 +57,7 @@ try {
   
     <div class="container-fluid" id="main-content">
         <div class="row">
-            <div class="col-lg-10 ms-auto p-4 overflow-hidden">
+            <div class="col-lg-12 ms-auto p-4 overflow-hidden">
             <h2 class="text-center mb-4">User List</h2>
 
 <?php if (!empty($users)): ?>

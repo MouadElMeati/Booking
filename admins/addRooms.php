@@ -2,7 +2,6 @@
 session_start();
 require('incl/cnx.php');
 
-// Fetch hotels for the dropdown
 try {
     $hotelStmt = $pdo->query("SELECT id, name FROM hotels");
     $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -11,21 +10,18 @@ try {
     $hotels = [];
 }
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $room_type = $_POST['room_type'];
     $price = $_POST['price'];
     $facilities = $_POST['facilities'];
     $features = $_POST['features'];
-    $hotel_id = $_POST['hotel_id']; // Get the selected hotel ID
-    $image = $_FILES['image']; // Get the uploaded image file
+    $hotel_id = $_POST['hotel_id']; 
+    $image = $_FILES['image']; 
 
-    // Validate and process the image
     if ($image['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'images/room/'; // Directory to store uploaded images
+        $uploadDir = 'images/room/'; 
         $uploadFile = $uploadDir . basename($image['name']);
 
-        // Move the uploaded file to the desired directory
         if (move_uploaded_file($image['tmp_name'], $uploadFile)) {
             try {
                 $stmt = $pdo->prepare("INSERT INTO rooms (room_type, price, facilities, features, hotel_id, image) VALUES (:room_type, :price, :facilities, :features, :hotel_id, :image)");
@@ -35,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'facilities' => $facilities,
                     'features' => $features,
                     'hotel_id' => $hotel_id,
-                    'image' => $uploadFile // Save the image path in the database
+                    'image' => $uploadFile 
                 ]);
                 header('Location: rooms.php');
                 exit;

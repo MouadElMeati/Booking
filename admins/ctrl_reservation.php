@@ -49,9 +49,8 @@ try {
 
     <div class="container-fluid" id="main-content">
         <div class="row">
-            <div class="col-lg-10 ms-auto p-4 overflow-hidden">
+            <div class="col-lg-12 ms-auto p-4 overflow-hidden">
                 <h2 class="text-center mb-4">Reservations List</h2>
-
                 <?php if (!empty($reservations)): ?>
                     <table class="table table-bordered table-striped">
                         <thead class="thead-dark">

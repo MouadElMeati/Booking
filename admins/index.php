@@ -29,13 +29,13 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login Panel</title>
+    <title>Admin Login </title>
     <?php require('incl/links.php') ?>
 </head>
 <body class="bg-light">
     <div class="login-form text-center rounded bg-white">
         <form method="POST">
-            <h4 class="bg-dark text-white py-3 rounded shadow overflow-hidden">ADMIN LOGIN PANEL</h4>
+            <h4 class="bg-primary text-white py-3 rounded shadow overflow-hidden">ADMIN LOGIN PANEL</h4>
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif; ?>
@@ -48,7 +48,7 @@ if (isset($_POST['login'])) {
                     <label class="form-label"></label>
                     <input name="admin-password" type="password" class="form-control shadow-none text-center" required placeholder="Password">
                 </div>
-                <button name="login" type="submit" class="btn text-white custom-bg shadow-none">Login</button>
+                <button name="login" type="submit" class="btn btn-success text-white custom-bg shadow-none">Login</button>
             </div>
         </form>
     </div>

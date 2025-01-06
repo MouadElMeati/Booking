@@ -1,7 +1,7 @@
 <?php
-require('admins/incl/cnx.php'); // Database connection
-
-// Fetch rooms from the database
+require('admins/incl/cnx.php')
+;
+require('include/LoginRegister.php');
 $rooms_stmt = $pdo->prepare("SELECT * FROM rooms");
 $rooms_stmt->execute();
 $rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,23 +20,8 @@ $rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-3 py-lg-2 shadow-sm sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php">Goat Hotels</a>
-            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active me-2" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link me-2" href="rooms.php">Rooms</a></li>
-                    <li class="nav-item"><a class="nav-link me-2" href="facilities.php">Facilities</a></li>
-                    <li class="nav-item"><a class="nav-link me-2" href="Contact.php">Contact us</a></li>
-                    <li class="nav-item"><a class="nav-link me-2" href="about.php">About Us</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        <?php require('include/Header.php') ?>
+        
     <div class="my-5 px-4">
         <h2 class="fw-bold h-font text-center">Our Rooms</h2>
         <div class="h-line bg-dark"></div>
